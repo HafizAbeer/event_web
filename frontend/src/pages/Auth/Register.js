@@ -2,27 +2,20 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; // Import Axios
+import axios from "axios";
 
 export default function Register() {
-  // Navigate
   let Navigate = useNavigate();
-
-  // Show Hide Password
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // Email Format
   let emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Handle Registration
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -39,7 +32,6 @@ export default function Register() {
       return;
     }
 
-    // Create user object
     const user = {
       name: fullName,
       email,
@@ -47,7 +39,6 @@ export default function Register() {
     };
 
     try {
-      // Send POST request to your backend
       const response = await axios.post("http://localhost:8000/register", user);
 
       if (response.data.status === "ok") {
@@ -63,62 +54,61 @@ export default function Register() {
   };
 
   return (
-    <main>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card p-4 text-center">
-              <form onSubmit={handleRegister}>
-                <h2 className="mb-4">Register</h2>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Type Your Full Name"
-                    className="form-control my-4"
-                    name="fullName"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    autoComplete="newfullName"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    placeholder="Type Your Email"
-                    className="form-control my-4"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="newemail"
-                  />
-                </div>
-                <div className="icon">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Type Your Password"
-                    id="pass"
-                    className="form-control my-4"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="newpassword"
-                  />
-                  <i
-                    onClick={togglePasswordVisibility}
-                    className="iconimg "
-                    style={{ fontSize: 25 }}
-                  >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </i>
-                </div>
-                <p>
-                  Already have an account? <Link to="/login">Login here</Link>
-                </p>
-                <button className="btn btn-success my-1">Submit</button>
-              </form>
-            </div>
+    <main className="d-flex align-items-center justify-content-center vh-100 bg-light">
+      <div
+        className="card shadow-lg p-4"
+        style={{ maxWidth: "500px", width: "100%" }}
+      >
+        <h2 className="text-center text-primary mb-4">Create an Account</h2>
+        <form onSubmit={handleRegister}>
+          <div className="mb-3">
+            <label className="form-label">Full Name</label>
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              className="form-control"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              autoComplete="newfullName"
+            />
           </div>
-        </div>
+          <div className="mb-3">
+            <label className="form-label">Email Address</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="newemail"
+            />
+          </div>
+          <div className="mb-3 position-relative">
+            <label className="form-label">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="newpassword"
+            />
+            <i
+              onClick={togglePasswordVisibility}
+              className="position-absolute top-50 end-0 translate-middle-y pe-3 text-muted"
+              style={{ cursor: "pointer", fontSize: "1.2rem" }}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </i>
+          </div>
+          <p className="text-center">
+            Already have an account?{" "}
+            <Link to="/login" className="text-decoration-none">
+              Login here
+            </Link>
+          </p>
+          <button className="btn btn-primary w-100">Register</button>
+        </form>
       </div>
     </main>
   );

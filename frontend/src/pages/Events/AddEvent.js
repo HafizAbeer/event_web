@@ -1,4 +1,3 @@
-// src/pages/Events/AddEvent.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -37,84 +36,106 @@ const AddEvent = () => {
   };
 
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card shadow-lg">
-            <div className="card-body">
-              <h2 className="text-center mb-4">Create New Event</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Event Title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Event Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <textarea
-                    className="form-control"
-                    placeholder="Event Description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <input
-                    type="date"
-                    className="form-control"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <select
-                    className="form-select"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option value="">Select Category</option>
-                    <option value="tech">Tech</option>
-                    <option value="music">Music</option>
-                    <option value="sports">Sports</option>
-                  </select>
-                </div>
-
-                <div className="mb-3">
-                  <select
-                    className="form-select"
-                    value={visibility}
-                    onChange={(e) => setVisibility(e.target.value)}
-                  >
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
-                  </select>
-                </div>
-
-                <div className="d-grid gap-2">
-                  <button className="btn btn-primary" type="submit">
-                    Add Event
-                  </button>
-                </div>
-              </form>
-            </div>
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{
+        background: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
+        height: "100vh",
+        padding: "20px",
+      }}
+    >
+      <div
+        className="card p-4 shadow-lg border-0"
+        style={{
+          width: "100%",
+          maxWidth: "600px",
+          borderRadius: "15px",
+        }}
+      >
+        <h2 className="text-center text-primary mb-4">Create New Event</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Event Title</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter event title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </div>
-        </div>
+
+          <div className="mb-3">
+            <label className="form-label">Event Location</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter event location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Event Description</label>
+            <textarea
+              className="form-control"
+              rows="4"
+              placeholder="Describe your event"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Event Date</label>
+            <input
+              type="date"
+              className="form-control"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Category</label>
+            <select
+              className="form-select"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              <option value="tech">Tech</option>
+              <option value="music">Music</option>
+              <option value="sports">Sports</option>
+            </select>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label">Visibility</label>
+            <select
+              className="form-select"
+              value={visibility}
+              onChange={(e) => setVisibility(e.target.value)}
+            >
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+          </div>
+
+          <div className="d-grid gap-2">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{
+                background: "linear-gradient(90deg, #007bff, #00d4ff)",
+                border: "none",
+              }}
+            >
+              Add Event
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
